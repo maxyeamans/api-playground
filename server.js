@@ -10,7 +10,14 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useUnifiedTopology: true });
+const connectionOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+};
+
+mongoose.connect('mongodb://localhost/playground', connectionOptions);
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
