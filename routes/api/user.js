@@ -7,8 +7,17 @@ Router.route('/')
     // const {name} = req.query;
     // console.log(name);
     // res.send(req.query);
+    let queryParams = {};
+    if(Object.entries(req.query).length !== 0){
+      const { firstName } = req.query;
+      queryParams = {
+        firstName
+      }
+      console.log(req.query);
+    }
     User
-      .find()
+      // .find(queryParams)
+      .find(req.query)
       .then( users => res.json(users) );
   })
   .post( (req, res, next) => {
